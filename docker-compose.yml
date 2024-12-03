@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./ItemManagementAPI
+      dockerfile: Dockerfile
+    ports:
+      - "5284:5284"
+      - "7089:7089"  # If HTTPS is needed
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./item-management-angular
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"  # Host port 4200 maps to container port 80 (Nginx)
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

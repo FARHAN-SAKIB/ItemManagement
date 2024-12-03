@@ -1,0 +1,6 @@
+@ItemManagementAPI_HostAddress = http://localhost:5284
+
+GET {{ItemManagementAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
